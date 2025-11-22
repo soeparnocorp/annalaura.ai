@@ -34,6 +34,19 @@
     font-size:2em;
     text-align:center;
   }
+  #progressContainer {
+    width: 60%;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  #progressBar {
+    width: 0%;
+    height: 20px;
+    background: #0f0;
+    border-radius: 10px;
+    transition: width 0.2s;
+  }
   #mainContent {
     display:none;
     position:relative;
@@ -87,8 +100,10 @@
 <canvas id="matrix"></canvas>
 
 <div id="loadingScreen">
-  <div id="slotAnimation">♠ ♦ ♥ ♣</div>
-  <div style="margin-top:20px; font-size:1.5em;">Soeparno Enterprise</div>
+  <div>Soeparno Enterprise</div>
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
 </div>
 
 <div id="mainContent">
@@ -119,8 +134,7 @@
   function draw() {
     ctx.fillStyle = "rgba(0,0,0,0.05)";
     ctx.fillRect(0,0,w,h);
-    ctx.fillStyle = "#fff"; // default white
-    // fallback to green glow if needed
+    ctx.fillStyle = "#fff"; // fallback white
     ctx.font = fontSize + "px monospace";
     for(let i=0;i<drops.length;i++){
       const text = letters.charAt(Math.floor(Math.random()*letters.length));
@@ -131,27 +145,25 @@
   }
   setInterval(draw,33);
 
-  // Loading animation (simplified slot reel)
-  const loading = document.getElementById("loadingScreen");
-  const main = document.getElementById("mainContent");
-  let slot = document.getElementById("slotAnimation");
-  let slotChars = ["♠","♦","♥","♣"];
-  let slotIndex = 0;
-  let slotInterval = setInterval(()=> {
-    slot.textContent = slotChars[slotIndex] + " " + slotChars[(slotIndex+1)%4] + " " + slotChars[(slotIndex+2)%4];
-    slotIndex = (slotIndex+1)%4;
-  },200);
-
-  // Simulate loading complete
-  setTimeout(()=> {
-    clearInterval(slotInterval);
-    loading.style.transition="opacity 1s";
-    loading.style.opacity=0;
-    setTimeout(()=> {
-      loading.style.display="none";
-      main.style.display="flex";
-    },1000);
-  },3000); // 3 sec loading
+  // Loading progress bar
+  const progressBar = document.getElementById("progressBar");
+  const loadingScreen = document.getElementById("loadingScreen");
+  const mainContent = document.getElementById("mainContent");
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 5; // random increment for dynamic feel
+    if(progress >= 100) progress = 100;
+    progressBar.style.width = progress + "%";
+    if(progress >= 100){
+      clearInterval(progressInterval);
+      loadingScreen.style.transition = "opacity 1s";
+      loadingScreen.style.opacity = 0;
+      setTimeout(()=>{
+        loadingScreen.style.display = "none";
+        mainContent.style.display = "flex";
+      },1000);
+    }
+  }, 100);
 </script>
 
 </body>
