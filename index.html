@@ -4,256 +4,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anna Laura AI</title>
-
 <style>
-/* Reset */
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:black;
-  overflow:hidden;
-  font-family: 'Montserrat', sans-serif;
-  color:white;
-}
-
-/* CANVAS MATRIX */
-#matrixCanvas{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-}
-
-/* LOADING SCREEN */
-#loadingScreen{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  animation: fadeOut 1s ease forwards;
-  animation-delay:3.1s;
-}
-
-/* TYPEWRITER TITLE */
-.loading-title{
-  font-size:2.2rem;
-  font-weight:600;
-  letter-spacing:0.15rem;
-  opacity:0;
-  overflow:hidden;
-  white-space:nowrap;
-  border-right:2px solid rgba(255,255,255,0.7);
-  animation: typing 1.8s steps(20,end) forwards, cursorBlink .7s step-end infinite;
-}
-
-/* BRAND NAME */
-.loading-brand{
-  font-size:0.85rem;
-  font-weight:300;
-  letter-spacing:0.12rem;
-  margin-top:10px;
-  opacity:0;
-  animation:fadeIn 1s ease forwards;
-  animation-delay:2.0s;
-  opacity:0.75;
-}
-
-/* Loading bar (now in the middle between title & brand) */
-.loading-bar{
-  width:260px;
-  height:4px;
-  background:rgba(255,255,255,0.2);
-  margin-top:22px;
-  overflow:hidden;
-  border-radius:2px;
-  opacity:0;
-  animation:fadeIn 1.2s ease forwards;
-  animation-delay:1.9s;
-}
-.loading-bar-fill{
-  width:0%;
-  height:100%;
-  background:linear-gradient(90deg, #ffffff, #d1d1d1);
-  animation:loadFill 2.4s ease forwards;
-  animation-delay:1.9s;
-}
-
-/* MAIN UI */
-#mainUI{
-  opacity:0;
-  animation:fadeIn 1.5s ease forwards;
-  animation-delay:3.4s;
-  position:relative;
-  width:100%;
-  height:100vh;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-/* HEADER TITLE (moved here per instruction) */
-.hero-title{
-  font-size:3.2rem;
-  font-weight:700;
-  letter-spacing:0.2rem;
-  margin-bottom:25px;
-  text-shadow:0 0 8px rgba(255,255,255,0.2);
-}
-
-/* DEMO BUTTON */
-.demo-btn{
-  display:inline-block;
-  padding:12px 32px;
-  border:2px solid rgba(255,255,255,0.6);
-  border-radius:30px;
-  color:white;
-  font-size:1.1rem;
-  letter-spacing:0.1rem;
-  text-decoration:none;
-  backdrop-filter:blur(4px);
-  background:rgba(255,255,255,0.08);
-  box-shadow:0 0 10px rgba(255,255,255,0.18);
-  transition:.25s;
-}
-.demo-btn:hover{
-  background:white;
-  color:black;
-}
-
-/* PACKAGES */
-.packages{
-  position:absolute;
-  bottom:80px;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  gap:25px;
-}
-
-.package-box{
-  padding:18px 30px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.25);
-  border-radius:14px;
-  backdrop-filter:blur(6px);
-  font-size:0.95rem;
-  width:170px;
-  text-align:center;
-}
-
-/* FOOTER */
-.footer{
-  position:absolute;
-  bottom:25px;
-  width:100%;
-  text-align:center;
-  font-size:0.8rem;
-  opacity:0.6;
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-@keyframes fadeOut{
-  from{opacity:1}
-  to{opacity:0; visibility:hidden}
-}
-@keyframes loadFill{
-  from{width:0%}
-  to{width:100%}
-}
-@keyframes typing{
-  from{width:0; opacity:1;}
-  to{width:260px; opacity:1;}
-}
-@keyframes cursorBlink{
-  50%{border-color:transparent;}
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero-title{font-size:2rem;}
-  .packages{flex-direction:column; bottom:100px;}
-  .package-box{width:60%; margin:0 auto;}
-}
+body{margin:0;padding:0;overflow:hidden;font-family:'Montserrat',sans-serif;background:black;color:white;}
+#matrixCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+#loadingScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;flex-direction:column;justify-content:center;align-items:center;animation:fadeOut 1s ease forwards;animation-delay:3.1s;}
+.loading-brand{font-size:1.2rem;font-weight:500;letter-spacing:0.1rem;opacity:0;overflow:hidden;white-space:nowrap;border-right:2px solid rgba(255,255,255,0.7);animation:typing 1.8s steps(24,end) forwards;margin-bottom:20px;}
+.loading-bar{width:260px;height:4px;background:rgba(255,255,255,0.2);margin-top:5px;overflow:hidden;border-radius:2px;animation:loadFill 2.4s ease forwards;}
+.loading-bar-fill{width:0%;height:100%;background:linear-gradient(90deg,#ffffff,#d1d1d1);animation:loadFill 2.4s ease forwards;}
+#mainUI{opacity:0;animation:fadeIn 1.5s ease forwards;animation-delay:3.4s;position:relative;width:100%;height:100vh;text-align:center;display:flex;flex-direction:column;justify-content:center;}
+.hero-title{font-size:3.2rem;font-weight:700;letter-spacing:0.2rem;text-shadow:0 0 8px rgba(255,255,255,0.2);}
+.hero-subtitle{font-size:1.2rem;font-weight:400;letter-spacing:0.05rem;margin-top:10px;text-shadow:0 0 6px rgba(255,255,255,0.2);}
+.demo-btn{display:inline-block;padding:12px 32px;border:2px solid rgba(255,255,255,0.6);border-radius:30px;color:white;font-size:1.1rem;letter-spacing:0.1rem;text-decoration:none;backdrop-filter:blur(4px);background:rgba(255,255,255,0.08);box-shadow:0 0 10px rgba(255,255,255,0.18);transition:.25s;margin-top:25px;}
+.demo-btn:hover{background:white;color:black;}
+.packages{position:absolute;bottom:140px;width:100%;display:flex;justify-content:center;gap:25px;}
+.package-box{padding:18px 30px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);border-radius:14px;backdrop-filter:blur(6px);font-size:0.95rem;width:170px;text-align:center;}
+.footer{position:absolute;bottom:25px;width:100%;text-align:center;font-size:0.8rem;opacity:0.6;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeOut{from{opacity:1}to{opacity:0;visibility:hidden}}
+@keyframes loadFill{from{width:0%}to{width:100%}}
+@keyframes typing{from{width:0;}to{width:100%;}}
+@media(max-width:768px){.hero-title{font-size:2rem;}.hero-subtitle{font-size:1rem;}.packages{flex-direction:column;bottom:120px;}.package-box{width:60%;margin:0 auto;}}
 </style>
 </head>
 <body>
-
 <canvas id="matrixCanvas"></canvas>
 
-<!-- LOADING -->
 <div id="loadingScreen">
-    <div class="loading-title">Anna Laura AI</div>
-
-    <div class="loading-bar">
-        <div class="loading-bar-fill"></div>
-    </div>
-
-    <div class="loading-brand">© 2025 SOEPARNO ENTERPRISE Corp.</div>
+  <div class="loading-brand">SOEPARNO ENTERPRISE Corp.</div>
+  <div class="loading-bar"><div class="loading-bar-fill"></div></div>
 </div>
 
-<!-- MAIN -->
 <div id="mainUI">
-    <div class="hero-title">ANNA LAURA AI</div>
-
-    <a href="#" class="demo-btn">OPEN DEMO</a>
-
-    <div class="packages">
-        <div class="package-box">Personal Version</div>
-        <div class="package-box">Creator Version</div>
-        <div class="package-box">Enterprise Version</div>
-    </div>
-
-    <div class="footer">© 2025 SOEPARNO ENTERPRISE Corp.</div>
+  <div class="hero-title">ANNA LAURA AI</div>
+  <div class="hero-subtitle">
+    Smart AI that understands your needs<br>
+    From creativity to productivity.
+  </div>
+  <a href="#" class="demo-btn">DEMO</a>
+  <div class="packages">
+    <div class="package-box">Personal Version</div>
+    <div class="package-box">Creator Version</div>
+    <div class="package-box">Enterprise Version</div>
+  </div>
+  <div class="footer">© 2025 SOEPARNO ENTERPRISE Corp.</div>
 </div>
 
 <script>
-/* MATRIX RAIN (White / Silver) */
 const canvas=document.getElementById("matrixCanvas");
 const ctx=canvas.getContext("2d");
-
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-
 const chars="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const fontSize=14;
 const columns=Math.floor(canvas.width / fontSize);
 const drops=new Array(columns).fill(1);
-
 function drawMatrix(){
   ctx.fillStyle="rgba(0,0,0,0.08)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-
   ctx.fillStyle="rgba(255,255,255,0.7)";
   ctx.font=fontSize+"px monospace";
-
   for(let i=0;i<drops.length;i++){
     const char=chars[Math.floor(Math.random()*chars.length)];
-    ctx.fillText(char, i*fontSize, drops[i]*fontSize);
-
-    if(drops[i]*fontSize > canvas.height && Math.random() > 0.975){
-      drops[i]=0;
-    }
+    ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>0.975){drops[i]=0;}
     drops[i]++;
   }
 }
-
-setInterval(drawMatrix, 40);
-
-window.addEventListener("resize", ()=>{
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-});
+setInterval(drawMatrix,40);
+window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 </script>
-
 </body>
 </html>
