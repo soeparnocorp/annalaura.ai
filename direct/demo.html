@@ -4,93 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anna Laura AI – Chat</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Montserrat',sans-serif;
-  background:black;
-  color:white;
-  overflow:hidden;
-  height:100vh;
-}
-
-/* MATRIX BACKGROUND SAMA PERSIS */
-#matrixCanvas{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  z-index:-1;
-}
-
-/* BACK BUTTON */
-.back-btn{
-  position:fixed;
-  top:20px;
-  left:20px;
-  z-index:999;
-  padding:10px 20px;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.3);
-  border-radius:30px;
-  color:white;
-  text-decoration:none;
-  font-size:0.9rem;
-  backdrop-filter:blur(6px);
-  transition:.25s;
-}
-.back-btn:hover{
-  background:white;
-  color:black;
-}
-
-/* IFRAME FULL SEAMLESS */
-iframe{
-  width:100%;
-  height:100vh;
-  border:none;
-}
+body{font-family:'Montserrat',sans-serif;background:black;color:white;height:100vh;overflow:hidden;position:relative;}
+#matrixCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+.back{position:fixed;top:20px;left:20px;z-index:999;padding:10px 20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);border-radius:30px;color:white;text-decoration:none;font-size:0.9rem;backdrop-filter:blur(6px);}
+.back:hover{background:white;color:black;}
 </style>
 </head>
 <body>
 
 <canvas id="matrixCanvas"></canvas>
+<a href="/" class="back">← Back</a>
 
-<a href="/" class="back-btn">← Back</a>
-
-<iframe src="https://anna-laura-demo.soeparnocorp.workers.dev" allowfullscreen></iframe>
+<!-- Worker chat asli 100% utuh -->
+<iframe src="https://anna-laura-demo.soeparnocorp.workers.dev" 
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+        allowfullscreen></iframe>
 
 <script>
-// MATRIX RAIN 100% SAMA DENGAN LANDING PAGE
+// Matrix rain identik dengan landing page
 const canvas = document.getElementById("matrixCanvas");
 const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 const chars = "01234567890123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const fontSize = 14;
 const columns = Math.floor(canvas.width / fontSize);
 const drops = new Array(columns).fill(1);
 
-function drawMatrix(){
-  ctx.fillStyle = "rgba(0,0,0,0.08)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = "rgba(255,255,255,0.7)";
-  ctx.font = fontSize+"px monospace";
-  for(let i=0;i<drops.length;i++){
-    const char = chars[Math.floor(Math.random()*chars.length)];
-    ctx.fillText(char, i*fontSize, drops[i]*fontSize);
-    if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i]=0;
-    drops[i]++;
-  }
-}
-setInterval(drawMatrix,40);
-
-window.addEventListener("resize", ()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
+function draw(){ctx.fillStyle="rgba(0,0,0,0.08)";ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(255,255,255,0.7)";ctx.font=fontSize+"px monospace";
+  for(let i=0;i<drops.length;i++){const c=chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(c,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height&&Math.random()>0.975)drops[i]=0;drops[i]++;}}
+setInterval(draw,40);
+window.addEventListener("resize",()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
 </script>
-
 </body>
 </html>
