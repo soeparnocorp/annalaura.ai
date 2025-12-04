@@ -9,7 +9,7 @@ body{
   font-family:'Montserrat',sans-serif;
   background:black;
   color:white;
-  overflow:hidden;
+  overflow-x:hidden;
 }/* CANVAS MATRIX */
 #matrixCanvas{
 position:fixed;
@@ -22,60 +22,42 @@ z-index:-1;
 #mainUI{
 position: relative;
 width: 100%;
-height: 100vh;
+min-height: 100vh;
 display: flex;
 flex-direction: column;
-justify-content: center; / default untuk mobile */
 align-items: center;
 text-align: center;
-padding: 20px 0;
+padding: 40px 20px;
+justify-content: flex-start; / header top */
 }
 
-/* Desktop spacing */
-@media(min-width: 769px){
-#mainUI {
-justify-content: space-around;
-padding: 40px 0;
+/* HEADER BLOCK */
+.header-block{
+margin-bottom: 40px;
 }
-}
-
-/* HEADER TITLE */
-.hero-title{
+.header-block .hero-title{
 font-size:3.2rem;
 font-weight:700;
-margin-bottom:5px;
-text-shadow:0 0 10px rgba(255,255,255,0.25);
+margin-bottom:10px;
+text-shadow:0 0 8px rgba(255,255,255,0.2);
 }
-
-/* SUBTITLE */
-.hero-subtitle{
+.header-block .hero-subtitle{
 font-size:1.2rem;
 margin-bottom:10px;
 line-height:1.4rem;
 opacity:0.85;
 }
-
-/* ABOUT PARAGRAPH */
-.hero-about{
-margin-top:10px;
-margin-bottom:20px;
+.header-block .hero-about{
 font-size:0.95rem;
 opacity:0.7;
 max-width:480px;
 line-height:1.3rem;
 }
 
-/* FADE-IN ANIMATION */
-.fade-in {
-opacity: 0;
-animation: fadeInUp 1.2s ease forwards;
+/* MIDDLE BLOCK */
+.middle-block{
+margin-bottom:40px;
 }
-@keyframes fadeInUp {
-from { opacity: 0; transform: translateY(12px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-/* DEMO BUTTON */
 .demo-btn{
 display:inline-block;
 padding:12px 32px;
@@ -94,14 +76,11 @@ margin-bottom:30px;
 background:white;
 color:black;
 }
-
-/* PACKAGES */
 .packages{
 display:flex;
 gap:25px;
 flex-wrap:wrap;
 justify-content:center;
-margin-bottom:30px;
 }
 .package-box{
 padding:18px 30px;
@@ -114,18 +93,20 @@ text-align:center;
 font-size:0.95rem;
 }
 
-/* FOOTER */
-.footer{
+/* FOOTER BLOCK */
+.footer-block{
+margin-top:auto;
 font-size:0.8rem;
 opacity:0.6;
 text-align:center;
+padding-bottom:20px;
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
-.hero-title{font-size:2rem;}
-.hero-subtitle{font-size:1rem;}
-.package-box{width:60%; margin:0 auto;}
+.header-block .hero-title{font-size:2rem;}
+.header-block .hero-subtitle{font-size:1rem;}
+.packages .package-box{width:60%; margin:0 auto;}
 }
 </style>
 
@@ -133,22 +114,28 @@ text-align:center;
 <body><canvas id="matrixCanvas"></canvas>
 
 <div id="mainUI">
-  <div class="hero-title fade-in">ANNA LAURA AI</div>
-  <div class="hero-subtitle fade-in">
-    Intelligent AI that understands your needs<br>
-    In helping your creativity and productivity.
+  <!-- HEADER -->
+  <div class="header-block">
+    <div class="hero-title">ANNA LAURA AI</div>
+    <div class="hero-subtitle">
+      Intelligent AI that understands your needs<br>
+      In helping your creativity and productivity.
+    </div>
+    <div class="hero-about">
+      An adaptive intelligence designed to evolve with your workflow — 
+      built to understand context, anticipate creative needs, and help you 
+      construct your own AI Universe.
+    </div>
+  </div>  <!-- MIDDLE -->  <div class="middle-block">
+    <a href="direct/demo.html" class="demo-btn">DEMO</a>
+    <div class="packages">
+      <div class="package-box">Personal Version</div>
+      <div class="package-box">Creator Version</div>
+      <div class="package-box">Enterprise Version</div>
+    </div>
+  </div>  <!-- FOOTER -->  <div class="footer-block">
+    © 2025 SOEPARNO ENTERPRISE Corp.
   </div>
-  <div class="hero-about fade-in">
-    An adaptive intelligence designed to evolve with your workflow — 
-    built to understand context, anticipate creative needs, and help you 
-    construct your own AI Universe.
-  </div><a href="direct/demo.html" class="demo-btn fade-in">DEMO</a>
-
-  <div class="packages fade-in">
-    <div class="package-box">Personal Version</div>
-    <div class="package-box">Creator Version</div>
-    <div class="package-box">Enterprise Version</div>
-  </div>  <div class="footer fade-in">© 2025 SOEPARNO ENTERPRISE Corp.</div>
 </div><script>
 /* MATRIX RAIN WHITE/SILVER */
 const canvas = document.getElementById("matrixCanvas");
